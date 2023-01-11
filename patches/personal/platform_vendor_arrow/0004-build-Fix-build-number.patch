@@ -1,0 +1,28 @@
+From df6e77eabe8083191e2984182d8aa82da7d08247 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Sat, 3 Oct 2020 14:28:35 -0700
+Subject: [PATCH] build: Fix build number
+
+This is only valid for GSI images.
+
+Change-Id: I55c8897d7d4d5c2a9e62b1a931b3856b2e38956e
+---
+ config/version.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/config/version.mk b/config/version.mk
+index 04dc8c0..90d85c5 100644
+--- a/config/version.mk
++++ b/config/version.mk
+@@ -56,7 +56,7 @@ ifeq ($(ARROW_COMMUNITY), true)
+     endif
+ endif
+
+-ARROW_VERSION := Arrow-$(ARROW_MOD_VERSION)-$(CURRENT_DEVICE)-$(ARROW_BUILD_TYPE)-$(shell date -u +%Y%m%d)-$(ARROW_BUILD_ZIP_TYPE)
++ARROW_VERSION := Arrow-$(ARROW_MOD_VERSION)-$(TARGET_PRODUCT)-$(ARROW_BUILD_TYPE)-$(shell date -u +%Y%m%d)-$(ARROW_BUILD_ZIP_TYPE)
+
+ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+   ro.arrow.version=$(ARROW_VERSION) \
+-- 
+2.25.1
+

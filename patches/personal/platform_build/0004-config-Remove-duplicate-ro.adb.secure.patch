@@ -1,0 +1,28 @@
+From 618bb1c5831e08582177579d1c98dc6955f6a450 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Wed, 11 Jan 2023 10:18:26 +0000
+Subject: [PATCH 4/4] config: Remove duplicate ro.adb.secure
+
+Change-Id: Ifbea437b89586a46351be35cbada75598ddc07f0
+---
+ core/main.mk | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/core/main.mk b/core/main.mk
+index 2abd9d2d6..448f22b47 100644
+--- a/core/main.mk
++++ b/core/main.mk
+@@ -371,10 +371,6 @@ ifneq (,$(user_variant))
+   ADDITIONAL_SYSTEM_PROPERTIES += ro.secure=1
+   ADDITIONAL_SYSTEM_PROPERTIES += security.perf_harden=1
+ 
+-  ifeq ($(user_variant),user)
+-    ADDITIONAL_SYSTEM_PROPERTIES += ro.adb.secure=1
+-  endif
+-
+   ifeq ($(user_variant),userdebug)
+     # Pick up some extra useful tools
+     tags_to_install += debug
+-- 
+2.34.1
+

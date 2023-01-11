@@ -1,0 +1,45 @@
+From f9a585a7a61eae3ec0a9e482269424668a27c8d3 Mon Sep 17 00:00:00 2001
+From: Alberto Ponces <ponces26@gmail.com>
+Date: Wed, 20 Oct 2021 15:54:26 +0100
+Subject: [PATCH 3/3] build: Disable inline kernel building
+
+Change-Id: I4c01aa093474a8017366bd5e98586c58b2cd6452
+---
+ build/tasks/kernel.mk | 2 ++
+ config/common.mk      | 2 ++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/build/tasks/kernel.mk b/build/tasks/kernel.mk
+index 3bd9dd6..f605b0c 100644
+--- a/build/tasks/kernel.mk
++++ b/build/tasks/kernel.mk
+@@ -71,6 +71,7 @@
+ #                                          kernel sources are present
+
+ ifneq ($(TARGET_NO_KERNEL),true)
++ifneq ($(TARGET_NO_KERNEL_OVERRIDE),true)
+
+ ## Externally influenced variables
+ KERNEL_SRC := $(TARGET_KERNEL_SOURCE)
+@@ -561,4 +562,5 @@ dtboimage: $(INSTALLED_DTBOIMAGE_TARGET)
+ .PHONY: dtbimage
+ dtbimage: $(INSTALLED_DTBIMAGE_TARGET)
+
++endif # TARGET_NO_KERNEL_OVERRIDE
+ endif # TARGET_NO_KERNEL
+diff --git a/config/common.mk b/config/common.mk
+index e0b392b..ce33fe8 100644
+--- a/config/common.mk
++++ b/config/common.mk
+@@ -42,6 +42,8 @@ PRODUCT_COPY_FILES += \
+ PRODUCT_COPY_FILES += \
+     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.software.sip.voip.xml
+
++TARGET_NO_KERNEL_OVERRIDE := true
++
+ # Face Unlock
+ TARGET_FACE_UNLOCK_SUPPORTED ?= true
+ ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
+-- 
+2.25.1
+
